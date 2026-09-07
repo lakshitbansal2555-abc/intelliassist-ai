@@ -1,0 +1,55 @@
+Introduction to Retrieval-Augmented Generation (RAG)
+
+Retrieval-Augmented Generation, or RAG, is an architecture that combines
+a retrieval system with a generative language model. Instead of relying
+purely on what a language model memorised during training, RAG first
+searches an external knowledge base for relevant information and then
+feeds that information to the model as context before it generates an
+answer. This approach reduces hallucination and lets the model answer
+questions about documents it has never seen before, such as a company's
+internal policies or a student's lecture notes.
+
+How RAG works
+
+A typical RAG pipeline has four stages. First, source documents are
+split into smaller chunks, usually a few hundred words each, so that
+relevant passages can be retrieved precisely rather than pulling in an
+entire document. Second, each chunk is converted into a numerical vector
+using an embedding model; chunks with similar meaning end up close
+together in this vector space, even if they use different words. Third,
+when a user asks a question, the question itself is embedded the same
+way, and the system finds the chunks whose vectors are closest to the
+question's vector. Fourth, those retrieved chunks are inserted into a
+prompt alongside the original question, and a large language model
+generates a final answer grounded in that retrieved context.
+
+Why vector databases matter
+
+Comparing a query embedding against millions of document embeddings one
+by one would be far too slow for a real application. Vector databases
+such as FAISS and ChromaDB solve this by building specialised indexes -
+data structures optimised for approximate nearest-neighbour search - so
+that finding the most relevant chunks takes milliseconds instead of
+seconds, even across very large document collections.
+
+Common use cases
+
+Organisations use RAG systems to build customer support chatbots that
+answer from internal documentation, research assistants that summarise
+and question academic papers, and enterprise search tools that let
+employees ask natural-language questions about contracts, policies, or
+reports instead of manually searching through folders of PDFs. Compared
+to fine-tuning a model on private data, RAG is cheaper, easier to keep
+up to date (you just re-index the documents), and more transparent,
+since the system can cite exactly which passage an answer came from.
+
+Limitations to keep in mind
+
+RAG is not a complete solution on its own. If the retrieval step returns
+irrelevant chunks, the generated answer will be poor regardless of how
+capable the language model is. Very long or poorly structured documents
+can also be hard to chunk well, and retrieval quality depends heavily on
+choosing a good embedding model and a sensible chunk size. For these
+reasons, evaluating a RAG system - checking whether it retrieves the
+right passages and whether its answers are actually grounded in them -
+is just as important as building it.

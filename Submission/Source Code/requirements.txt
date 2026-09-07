@@ -1,0 +1,15 @@
+streamlit>=1.49,<2
+langchain>=1.4,<2
+langchain-core>=1.6,<2
+langchain-community==0.4.2
+langchain-text-splitters>=1.0,<2
+langchain-google-genai==4.4.0
+langchain-openai==1.6.0
+sentence-transformers>=5.1,<6
+faiss-cpu>=1.12,<2
+pypdf>=6,<7
+docx2txt>=0.9,<1
+vaderSentiment>=3.3.2,<4
+scikit-learn>=1.7,<2
+python-dotenv>=1.1,<2
+pandas>=2.3,<3
